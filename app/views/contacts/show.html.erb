@@ -3,6 +3,23 @@
 <p>tel : <%= @contact.phone %></p>
 <p>adresse : <%= @contact.adress %></p>
 
+<h1>Mes opportunités</h1>
+
+<% @opportunities.each do |opp| %>
+  <p><a href="/opportunities/<%= opp.id %>"><%= opp.entreprise %> le <%= opp.created_at %></a></p>
+<% end %>
+
+<h1>Créer une opportunité</h1>
+
+<%= form_tag("/opportunities/#{params[:id]}", method: "post") do %>
+  <%= label_tag(:entreprise, "Entreprise :") %>
+  <%= text_field_tag(:entreprise) %>
+  <%= select_tag(:status_id, options_for_select([['Contacté', 1], ['En attente', 2]])) %>
+  <%= label_tag(:content, "Description :") %>
+  <%= text_field_tag(:content) %>
+  <%= submit_tag("Créer une opportunité") %>
+<% end %>
+
 <%= form_tag("/contacts/#{params[:id]}", method: "delete") do %>
   <%= submit_tag("Supprimer") %>
 <% end %>

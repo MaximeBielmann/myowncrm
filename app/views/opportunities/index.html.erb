@@ -1,0 +1,4 @@
+<h1>Les opportunités en cours</h1>
+<% @opportunities.each do |opp| %>
+    <p><a href="/opportunities/<%= opp.id %>"><%= opp.entreprise %> le <%= opp.created_at %></a></p>
+<% end %>

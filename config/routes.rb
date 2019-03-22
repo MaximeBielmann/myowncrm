@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   post '/contacts' => "contacts#create"
   patch '/contacts/:id' => "contacts#update"
   delete '/contacts/:id' => "contacts#destroy"
+  
+  get '/opportunities' => "opportunities#index"
+  get '/opportunities/:id' => "opportunities#show"
+  post '/opportunities/:id' => "opportunities#create"
+  patch '/opportunities/:id' => "opportunities#update"
+  delete '/opportunities/:id' => "opportunities#destroy"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

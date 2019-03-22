@@ -13,6 +13,7 @@ class ContactsController < ApplicationController
   
   def show
     @contact = Contact.find(params[:id])
+    @opportunities = Opportunity.where(contact_id: params[:id])
   end
   
   def update

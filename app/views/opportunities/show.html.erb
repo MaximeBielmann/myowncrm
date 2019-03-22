@@ -1,0 +1,15 @@
+<h1><%= @opportunity.entreprise %></h1>
+<p>Crée le <%= @opportunity.created_at %></p>
+<p><%= @opportunity.content %></p>
+<h1>Modifier l'opportunité</h1>
+<%= form_tag("/opportunities/#{params[:id]}", method: "patch") do %>
+  <%= label_tag(:entreprise, "Entreprise :") %>
+  <%= text_field_tag(:entreprise, @opportunity.entreprise) %>
+  <%= select_tag(:status_id, options_for_select([['Contacté', 1], ['En attente', 2]])) %>
+  <%= label_tag(:content, "Description :") %>
+  <%= text_field_tag(:content, @opportunity.content) %>
+  <%= submit_tag("Modifier l'opportunité") %>
+<% end %>
+<%= form_tag("/opportunities/#{params[:id]}", method: "delete") do %>
+  <%= submit_tag("Supprimer") %>
+<% end %>
