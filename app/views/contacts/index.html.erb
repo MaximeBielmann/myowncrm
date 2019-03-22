@@ -1,0 +1,4 @@
+<h1>Les contacts</h1>
+<% @contacts.each do |contact| %>
+<p><a href="/contacts/<%= contact.id %>" ><%= contact.last_name %> <%= contact.first_name %> - <%= contact.email %></a></p>
+<% end %>

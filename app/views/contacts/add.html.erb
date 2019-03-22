@@ -1,0 +1,14 @@
+<h1>Ajouter un contact</h1>
+<%= form_tag("/contacts", method: "post") do %>
+  <%= label_tag(:last_name, "Nom :") %>
+  <%= text_field_tag(:last_name) %>
+  <%= label_tag(:first_name, "Prénom :") %>
+  <%= text_field_tag(:first_name) %>
+  <%= label_tag(:phone, "Tel :") %>
+  <%= text_field_tag(:phone) %>
+  <%= label_tag(:email, "Mail :") %>
+  <%= text_field_tag(:email) %>
+  <%= label_tag(:adress, "Adresse :") %>
+  <%= text_field_tag(:adress) %>
+  <%= submit_tag("Ajouter") %>
+<% end %>

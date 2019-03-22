@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myowncrm</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <header>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/contacts">Contact</a> - <a href="/contacts/add">Ajouter un contact</a></li>
+      <li><a href="/">Opportunités</a></li>
+    </ul>
+  </header>
+  <body>
+    <%= yield %>
+  </body>
+  <footer>
+    
+  </footer>
+</html>

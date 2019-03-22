@@ -1,0 +1,25 @@
+<h1><%= @contact.last_name %> <%= @contact.first_name %></h1>
+<p>email : <%= @contact.email %></p>
+<p>tel : <%= @contact.phone %></p>
+<p>adresse : <%= @contact.adress %></p>
+
+<%= form_tag("/contacts/#{params[:id]}", method: "delete") do %>
+  <%= submit_tag("Supprimer") %>
+<% end %>
+
+<a href="/contacts">Retour aux contacts</a>
+
+<h1>Modifier le contact</h1>
+<%= form_tag("/contacts/#{params[:id]}", method: "patch") do %>
+  <%= label_tag(:last_name, "Nom :") %>
+  <%= text_field_tag(:last_name, @contact.last_name) %>
+  <%= label_tag(:first_name, "Prénom :") %>
+  <%= text_field_tag(:first_name, @contact.first_name) %>
+  <%= label_tag(:phone, "Tel :") %>
+  <%= text_field_tag(:phone, @contact.phone) %>
+  <%= label_tag(:email, "Mail :") %>
+  <%= text_field_tag(:email, @contact.email) %>
+  <%= label_tag(:adress, "Adresse :") %>
+  <%= text_field_tag(:adress, @contact.adress) %>
+  <%= submit_tag("Modifier") %>
+<% end %>
