@@ -4,7 +4,7 @@
 <p>adresse : <%= @contact.adress %></p>
 
 <h1>Mes opportunités</h1>
-<% if @opportunities %>
+<% if @opportunities.size > 0 %>
   <% @opportunities.each do |opp| %>
     <p><a href="/opportunities/<%= opp.id %>"><%= opp.entreprise %> le <%= opp.created_at %></a></p>
   <% end %>
