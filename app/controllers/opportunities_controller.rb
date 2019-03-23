@@ -18,7 +18,8 @@ class OpportunitiesController < ApplicationController
   end
   
   def destroy
+    @id = Opportunity.find(params[:id]).contact.id
     Opportunity.find(params[:id]).destroy
-    redirect_to "/contacts/#{params[:id]}"
+    redirect_to "/contacts/#{@id}"
   end
 end

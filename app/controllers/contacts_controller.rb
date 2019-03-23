@@ -22,6 +22,7 @@ class ContactsController < ApplicationController
   end
 
   def destroy
+    Opportunity.where(contact_id: params[:id]).destroy_all
     Contact.find(params[:id]).destroy
     redirect_to '/contacts'
   end
