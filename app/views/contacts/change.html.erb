@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Modifier le contact</h1>
+    </div>
+  </div>
+        <%= form_tag("/contacts/#{@contact.id}", method: "patch") do %>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <%= label_tag(:last_name, "Nom :") %>
+                <%= text_field_tag(:last_name, @contact.last_name, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:first_name, "Prénom :") %>
+                <%= text_field_tag(:first_name, @contact.first_name, class: 'form-control') %>
+              </div>  
+              <div class="form-group">
+                <%= label_tag(:phone, "Téléphone :") %>
+                <%= text_field_tag(:phone, @contact.phone, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:email, "Mail :") %>
+                <%= text_field_tag(:email, @contact.email, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:adress, "Adresse :") %>
+                <%= text_field_tag(:adress, @contact.adress, class: 'form-control') %>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <%= label_tag(:facebook_profil, "Facebook :") %>
+                <%= text_field_tag(:facebook_profil, @contact.facebook_profil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:twitter_profil, "Twitter :") %>
+                <%= text_field_tag(:twitter_profil, @contact.twitter_profil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:linkedin_profil, "Linkedin :") %>
+                <%= text_field_tag(:linkedin_profil, @contact.linkedin_profil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:instagram_profil, "Instagram :") %>
+                <%= text_field_tag(:instagram_profil, @contact.instagram_profil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:youtube_profil, "Youtube :") %>
+                <%= text_field_tag(:youtube_profil, @contact.youtube_profil, class: 'form-control') %>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group text-center">
+                <%= submit_tag("Modifier le contact", class: 'btn btn-primary btn-block') %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= form_tag("/contacts/#{params[:id]}", method: "delete", class: 'text-center') do %>
+          <%= submit_tag("Supprimer le contact", class: 'btn btn-primary btn-sm') %>
+        <% end %>
+</div>

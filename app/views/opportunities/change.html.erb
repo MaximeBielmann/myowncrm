@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h2 class="text-center">Modifier le projet : <%= @opportunity.project %></h2>
+        <%= form_tag("/opportunities/#{params[:id]}", method: "patch") do %>
+          <div class="form-group">
+            <%= label_tag(:project, "Nom du projet :") %>
+            <%= text_field_tag(:project, @opportunity.project, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:status_id, "Description :") %>
+            <%= select_tag(:status_id, options_for_select([['Contacté', 1], ['En attente', 2]], @opportunity.status_id), class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:content, "Description :") %>
+            <%= text_area_tag(:content, @opportunity.content, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+              <%= submit_tag("Modifier le projet", class: 'btn btn-primary btn-block') %>
+          </div>
+        <% end %>
+        <%= form_tag("/opportunities/#{params[:id]}", method: "delete", class: 'text-center') do %>
+          <%= submit_tag("Supprimer le projet", class: 'btn btn-primary btn-sm') %>
+        <% end %>
+</div>

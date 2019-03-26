@@ -1,45 +1,62 @@
-<h1><%= @contact.last_name %> <%= @contact.first_name %></h1>
-<p>email : <%= @contact.email %></p>
-<p>tel : <%= @contact.phone %></p>
-<p>adresse : <%= @contact.adress %></p>
-
-<h1>Mes opportunités</h1>
-<% if @opportunities.size > 0 %>
-  <% @opportunities.each do |opp| %>
-    <p><a href="/opportunities/<%= opp.id %>"><%= opp.entreprise %> le <%= opp.created_at %></a></p>
-  <% end %>
-<% else %>
-  <p>Aucune opportunité pour ce contact.</p>
-<% end %>
-
-<h1>Créer une opportunité</h1>
-
-<%= form_tag("/opportunities/#{params[:id]}", method: "post") do %>
-  <%= label_tag(:entreprise, "Entreprise :") %>
-  <%= text_field_tag(:entreprise) %>
-  <%= select_tag(:status_id, options_for_select([['Contacté', 1], ['En attente', 2]])) %>
-  <%= label_tag(:content, "Description :") %>
-  <%= text_field_tag(:content) %>
-  <%= submit_tag("Créer une opportunité") %>
-<% end %>
-
-<%= form_tag("/contacts/#{params[:id]}", method: "delete") do %>
-  <%= submit_tag("Supprimer") %>
-<% end %>
-
-<a href="/contacts">Retour aux contacts</a>
-
-<h1>Modifier le contact</h1>
-<%= form_tag("/contacts/#{params[:id]}", method: "patch") do %>
-  <%= label_tag(:last_name, "Nom :") %>
-  <%= text_field_tag(:last_name, @contact.last_name) %>
-  <%= label_tag(:first_name, "Prénom :") %>
-  <%= text_field_tag(:first_name, @contact.first_name) %>
-  <%= label_tag(:phone, "Tel :") %>
-  <%= text_field_tag(:phone, @contact.phone) %>
-  <%= label_tag(:email, "Mail :") %>
-  <%= text_field_tag(:email, @contact.email) %>
-  <%= label_tag(:adress, "Adresse :") %>
-  <%= text_field_tag(:adress, @contact.adress) %>
-  <%= submit_tag("Modifier") %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center"><%= @contact.last_name %> <%= @contact.first_name %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h2 class="text-center">Informations générales</h2>
+      <p>Mail : <%= @contact.email %></p>
+      <p>Téléphone : <%= @contact.phone %></p>
+      <p>Adresse : <%= @contact.adress %></p>
+      
+    </div>
+    <div class="col-6">
+      <h2 class="text-center">Réseaux sociaux</h2>
+      <p>Facebook : <%= @contact.facebook_profil %></p>
+      <p>Twitter : <%= @contact.twitter_profil %></p>
+      <p>Linkedin : <%= @contact.linkedin_profil %></p>
+      <p>Instagram : <%= @contact.instagram_profil %></p>
+      <p>Youtube : <%= @contact.youtube_profil %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+       <a href="/contacts/<%= @contact.id%>/update">Modifier le contact</a>
+    </div>
+    <div class="col-6">
+    
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2 class="text-center">Les projets de <%= @contact.first_name %> <%= @contact.last_name %></h2>
+        <table class="table text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Projet</th>
+                  <th scope="col">Créé le</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% @opportunities.each do |opp| %>
+                    <tr>
+                      <th scope="row"><%= opp.id %></th>
+                      <td><%= opp.status_id %></td>
+                      <td><%= opp.project %></td>
+                      <td><%= opp.created_at %></td>
+                      <td><%= opp.content.truncate_words(4) %></td>
+                      <td><a href="/opportunities/<%= opp.id %>">Voir l'opportunité</a></td>
+                    </tr>
+                  <% end %>
+              </tbody>
+            </table>
+        <a href="/contacts/<%= @contact.id%>/add" class="btn btn-primary">ajouter un projet</a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,37 @@
-<h1>Les opportunités en cours</h1>
-<% @opportunities.each do |opp| %>
-    <p><a href="/opportunities/<%= opp.id %>"><%= opp.entreprise %> le <%= opp.created_at %></a></p>
-<% end %>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Les opportunités en cours</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom du contact</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Projet</th>
+                  <th scope="col">Créé le</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% @opportunities.each do |opp| %>
+                    <tr>
+                      <th scope="row"><%= opp.id %></a></th>
+                      <td><a href="/contacts/<%= opp.contact.id %>"><%= opp.contact.last_name %> <%= opp.contact.first_name %></a></td>
+                      <td><%= opp.status_id %></td>
+                      <td><%= opp.project %></td>
+                      <td><%= opp.created_at %></td>
+                      <td><%= opp.content.truncate_words(6) %></td>
+                      <td><a href="/opportunities/<%= opp.id %>">Voir le projet</a></td>
+                    </tr>
+                  <% end %>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>

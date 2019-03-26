@@ -1,4 +1,39 @@
-<h1>Les contacts</h1>
-<% @contacts.each do |contact| %>
-<p><a href="/contacts/<%= contact.id %>" ><%= contact.last_name %> <%= contact.first_name %> - <%= contact.email %></a></p>
-<% end %>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Les contacts</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">Mail</th>
+                  <th scope="col">Téléphone</th>
+                  <th scope="col">Adresse</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% @contacts.each do |contact| %>
+                    <tr>
+                      <th scope="row"><%= contact.id %></th>
+                      <td><%= contact.last_name %></td>
+                      <td><%= contact.first_name %></td>
+                      <td><%= contact.email %></td>
+                      <td><%= contact.phone %></td>
+                      <td><%= contact.adress %></td>
+                      <td><a href="/contacts/<%= contact.id %>">Voir le contact</a></td>
+                    </tr>
+                  <% end %>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

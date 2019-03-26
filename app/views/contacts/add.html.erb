@@ -1,14 +1,62 @@
-<h1>Ajouter un contact</h1>
-<%= form_tag("/contacts", method: "post") do %>
-  <%= label_tag(:last_name, "Nom :") %>
-  <%= text_field_tag(:last_name) %>
-  <%= label_tag(:first_name, "Prénom :") %>
-  <%= text_field_tag(:first_name) %>
-  <%= label_tag(:phone, "Tel :") %>
-  <%= text_field_tag(:phone) %>
-  <%= label_tag(:email, "Mail :") %>
-  <%= text_field_tag(:email) %>
-  <%= label_tag(:adress, "Adresse :") %>
-  <%= text_field_tag(:adress) %>
-  <%= submit_tag("Ajouter") %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Ajouter un contact</h1>
+    </div>
+  </div>
+      <%= form_tag("/contacts", method: "post") do %>
+        <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                <%= label_tag(:last_name, "Nom :") %>
+                <%= text_field_tag(:last_name, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:first_name, "Prénom :") %>
+                <%= text_field_tag(:first_name, nil, class: 'form-control') %>
+              </div>  
+              <div class="form-group">
+                <%= label_tag(:phone, "Téléphone :") %>
+                <%= text_field_tag(:phone, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:email, "Mail :") %>
+                <%= text_field_tag(:email, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:adress, "Adresse :") %>
+                <%= text_field_tag(:adress, nil, class: 'form-control') %>
+              </div>
+          </div>
+          <div class="col-6">
+              <div class="form-group">
+                <%= label_tag(:facebook_profil, "Facebook :") %>
+                <%= text_field_tag(:facebook_profil, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:twitter_profil, "Twitter :") %>
+                <%= text_field_tag(:twitter_profil, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:linkedin_profil, "Linkedin :") %>
+                <%= text_field_tag(:linkedin_profil, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:instagram_profil, "Instagram :") %>
+                <%= text_field_tag(:instagram_profil, nil, class: 'form-control') %>
+              </div>
+              <div class="form-group">
+                <%= label_tag(:youtube_profil, "Youtube :") %>
+                <%= text_field_tag(:youtube_profil, nil, class: 'form-control') %>
+              </div>
+          </div>
+          <div class="col-12">
+              <div class="form-group text-center">
+                <%= submit_tag("Ajouter le contact", class: 'btn btn-primary btn-block') %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

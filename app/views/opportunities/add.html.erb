@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h2 class="text-center">Créer un projet pour <%= @contact.first_name %> <%= @contact.last_name %></h2>
+        <%= form_tag("/opportunities/#{params[:id]}", method: "post") do %>
+          <div class="form-group">
+            <%= label_tag(:project, "Nom du projet :") %>
+            <%= text_field_tag(:project, nil, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:content, "Description :") %>
+            <%= select_tag(:status_id, options_for_select([['Contacté', 1], ['En attente', 2]]), class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:content, "Description :") %>
+            <%= text_area_tag(:content, nil, class: 'form-control') %>
+          </div>
+          <%= submit_tag("Créer le projet", class: 'btn btn-primary btn-block') %>
+        <% end %>
+    </div>
+  </div>
+</div>
