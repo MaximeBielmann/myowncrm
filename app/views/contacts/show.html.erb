@@ -1,4 +1,6 @@
-<div class="container">
+<% if @contact.user_id == current_user.id %>
+
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <h1 class="text-center"><%= @contact.last_name %> <%= @contact.first_name %></h1>
@@ -60,3 +62,9 @@
     </div>
   </div>
 </div>
+
+<% else %>
+
+Vous n'avez pas accès à ce contenu
+
+<% end %>

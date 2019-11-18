@@ -1,8 +1,10 @@
-<div class="container">
+<% if @opportunity.user_id == current_user.id %>
+
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <h1 class="text-center"><%= @opportunity.project %></h1>
-      <p>Crée le <%= @opportunity.created_at %> avec <a href="/contacts/<%= @opportunity.contact.id %>" ><%= @opportunity.contact.first_name %> <%= @opportunity.contact.last_name %></a></p>
+      <p>Crée le <%= @opportunity.created_at.strftime("%d-%m-%Y") %> avec <a href="/contacts/<%= @opportunity.contact.id %>" ><%= @opportunity.contact.first_name %> <%= @opportunity.contact.last_name %></a></p>
     </div>
   </div>
   <div class="row">
@@ -11,21 +13,79 @@
       <p><%= @opportunity.content %></p>
     </div>
     <div class="col-6">
-      <h3 class="text-center">To-do list</h3>
-      <ul>
-        <% @todos.each do |to| %>
-          <li><%= to.content %> : 
-          <% if to.status === "PENDING" %>
-            en attente
-          <% end %>
-          </li>
+      <h2 class="text-center">To-do pour : <%= @opportunity.project %></h2>
+      <table class="table text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% @todos.each do |to| %>
+                  <% if to.status == "PENDING" %>
+                  <%= form_tag("/todo/#{to.id}/finish", method: "patch") do %>
+                    <tr>
+                      <th scope="row">
+                        <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-success' do %>
+                        <i class='fas fa-check'></i>
+                        <% end %>
+                      </th>
+                      <td><%= to.end_date.strftime("%d-%m-%Y") %></td>
+                      <td><%= to.content %></td>
+                    </tr>
+                  <% end %>
+                  <% else %>
+                  <%= form_tag("/todo/#{to.id}/pending", method: "patch") do %>
+                    <tr>
+                      <th scope="row">
+                        <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-danger' do %>
+                        <i class='fas fa-times'></i>
+                        <% end %>
+                      </th>
+                      <td><del><%= to.end_date.strftime("%d-%m-%Y") %></del></td>
+                      <td><del><%= to.content %></del></td>
+                    
+                  <% end %>
+                  <td>
+                    <%= form_tag("/todo/#{to.id}", method: "delete", class: 'text-center') do %>
+                        <%= submit_tag("Supprimer", class: 'btn btn-primary btn-sm') %>
+                    <% end %>
+                  </td>
+                  </tr>
+                  <% end %>
+                  <% end %>
+              </tbody>
+            </table>
+            
+            <h2 class="text-center">Ajouter un to-do pour : <%= @opportunity.project %></h2>
+        <%= form_tag("/todo/#{params[:id]}", method: "post") do %>
+          <div class="form-group">
+            <%= label_tag(:end_date, "Date :") %>
+            <%= date_field_tag(:end_date, nil, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:status, "Status :") %>
+            <%= select_tag(:status, options_for_select([["En attente", "PENDING"], ["Terminé", "FINISH"]]), class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:content, "Description :") %>
+            <%= text_area_tag(:content, nil, class: 'form-control') %>
+          </div>
+          <%= submit_tag("Créer le todo", class: 'btn btn-primary btn-block') %>
         <% end %>
-      </ul>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <a href="/opportunities/<%= @opportunity.id %>/add_todolist">Ajouter un todo</a>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <a href="/opportunities/<%= @opportunity.id %>/add">Ajouter un todo</a>
+      <a href="/opportunities/<%= @opportunity.id %>/add_note">Ajouter une note</a>
     </div>
   </div>
   <div class="row">
@@ -33,4 +93,36 @@
       <a href="/opportunities/<%= @opportunity.id %>/update">Modifier le projet</a>
     </div>
   </div>
+  <div class="row">
+    <div class="col-6">
+      <h3>Ajouter une note</h3>
+      
+      <% @notes.each do |note| %>
+        <p><%= note.note_title %> le <%= note.note_date.strftime("%d-%m-%Y") %></p>
+        <p><%= note.note_content %></p>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <h2 class="text-center">Ajouter une note pour le projet : <%= @opportunity.project %></h2>
+        <%= form_tag("/notes/#{params[:id]}", method: "post") do %>
+          <div class="form-group">
+            <%= label_tag(:note_title, "Titre :") %>
+            <%= text_field_tag(:note_title, nil, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:note_content, "Description :") %>
+            <%= text_area_tag(:note_content, nil, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+              <%= submit_tag("Ajouter la note", class: 'btn btn-primary btn-block') %>
+          </div>
+        <% end %>
+    </div>
+  </div>
 </div>
+
+<% else %>
+
+Vous n'avez pas accès à ce contenu
+
+<% end %>

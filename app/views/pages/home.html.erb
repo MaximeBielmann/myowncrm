@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <h1 class="text-center">Bonjour Maxime</h1>
@@ -6,14 +6,134 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <h2 class="text-center">Ma journée</h2>
-            <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=WEEK&amp;height=600&amp;wkst=2&amp;bgcolor=%23ffffff&amp;src=bielmann.maxime%40gmail.com&amp;color=%23A32929&amp;ctz=Europe%2FParis" style="border-width:0" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-        </div>
+            <h2 class="block sub-menu">Ma journée</h2>
+            <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;mode=WEEK&amp;height=600&amp;wkst=2&amp;bgcolor=%23ffffff&amp;src=bielmann.maxime%40gmail.com&amp;color=%23A32929&amp;ctz=Europe%2FParis" style="border-width:0" width="100%" height="600px" frameborder="0" scrolling="no"></iframe>
+            </div>
          <div class="col-6">
-            <h2 class="text-center">To-Do</h2>
-            <% @todos.each do |to| %>
-                <p><a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> : <%= to.content %></p>
-            <% end %>
+           <h2 class="block sub-menu">En retard</h2>
+              <ul class="list-unstyled">
+                <% @todopast.each do |to| %>
+                  <% if to.status == "PENDING" %>
+                  <li> 
+                    <%= form_tag("/todo/#{to.id}/finish", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-success' do %>
+                      <i class='fas fa-check'></i>
+                      <% end %>
+                      <%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %>
+                    <% end %>
+                  </li>
+                  <% else %>
+                  <li>
+                    <%= form_tag("/todo/#{to.id}/pending", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-danger' do %>
+                      <i class="fas fa-times"></i>
+                      <% end %>
+                      <del><%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %></del>
+                    <% end %>
+                  </li>
+                  <% end %>
+                <% end %>
+              </ul>
+           
+           <h2 class="block sub-menu">Aujourd'hui</h2>
+              <ul class="list-unstyled">
+                <% @tododay.each do |to| %>
+                  <% if to.status == "PENDING" %>
+                  <li> 
+                    <%= form_tag("/todo/#{to.id}/finish", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-success' do %>
+                      <i class='fas fa-check'></i>
+                      <% end %>
+                      <%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %>
+                    <% end %>
+                  </li>
+                  <% else %>
+                  <li>
+                    <%= form_tag("/todo/#{to.id}/pending", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-danger' do %>
+                      <i class="fas fa-times"></i>
+                      <% end %>
+                      <del><%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %></del>
+                    <% end %>
+                  </li>
+                  <% end %>
+                <% end %>
+              </ul>
+           
+            <h2 class="block sub-menu">Cette semaine</h2>
+              <ul class="list-unstyled">
+                <% @todoweek.each do |to| %>
+                  <% if to.status == "PENDING" %>
+                  <li> 
+                    <%= form_tag("/todo/#{to.id}/finish", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-success' do %>
+                      <i class='fas fa-check'></i>
+                      <% end %>
+                      <%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %>
+                    <% end %>
+                  </li>
+                  <% else %>
+                  <li>
+                    <%= form_tag("/todo/#{to.id}/pending", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-danger' do %>
+                      <i class="fas fa-times"></i>
+                      <% end %>
+                      <del><%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %></del>
+                    <% end %>
+                  </li>
+                  <% end %>
+                <% end %>
+              </ul>
+              
+              <h2 class="block sub-menu">Ce mois</h2>
+              <ul class="list-unstyled">
+                <% @todomonth.each do |to| %>
+                  <% if to.status == "PENDING" %>
+                  <li> 
+                    <%= form_tag("/todo/#{to.id}/finish", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-success' do %>
+                      <i class='fas fa-check'></i>
+                      <% end %>
+                      <%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %>
+                    <% end %>
+                  </li>
+                  <% else %>
+                  <li>
+                    <%= form_tag("/todo/#{to.id}/pending", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-danger' do %>
+                      <i class="fas fa-times"></i>
+                      <% end %>
+                      <del><%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %></del>
+                    <% end %>
+                  </li>
+                  <% end %>
+                <% end %>
+              </ul>
+              
+              <h2 class="block sub-menu">Cette année</h2>
+              <ul class="list-unstyled">
+                <% @todoyear.each do |to| %>
+                  <% if to.status == "PENDING" %>
+                  <li> 
+                    <%= form_tag("/todo/#{to.id}/finish", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-success' do %>
+                      <i class='fas fa-check'></i>
+                      <% end %>
+                      <%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %>
+                    <% end %>
+                  </li>
+                  <% else %>
+                  <li>
+                    <%= form_tag("/todo/#{to.id}/pending", method: "patch") do %>
+                      <%= button_tag type: 'submit', class: 'btn btn-primary btn-sm btn-danger' do %>
+                      <i class="fas fa-times"></i>
+                      <% end %>
+                      <del><%= to.end_date.strftime("%d-%m-%Y") %> : <a href="/opportunities/<%= to.opportunity.id %>"><%= to.opportunity.project %></a> - <%= to.content %></del>
+                    <% end %>
+                  </li>
+                  <% end %>
+                <% end %>
+              </ul>
         </div>
     </div>
 </div>

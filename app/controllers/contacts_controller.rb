@@ -1,10 +1,12 @@
 class ContactsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
-    @contacts = Contact.all
+    @contacts = Contact.where(user_id: current_user.id)
   end
 
   def create
-    Contact.create last_name: params[:last_name], first_name: params[:first_name], email: params[:email], phone: params[:phone], adress: params[:adress], facebook_profil: params[:facebook_profil], twitter_profil: params[:twitter_profil], linkedin_profil: params[:linkedin_profil], instagram_profil: params[:instagram_profil], youtube_profil: params[:youtube_profil]
+    Contact.create last_name: params[:last_name], first_name: params[:first_name], email: params[:email], phone: params[:phone], adress: params[:adress], facebook_profil: params[:facebook_profil], twitter_profil: params[:twitter_profil], linkedin_profil: params[:linkedin_profil], instagram_profil: params[:instagram_profil], youtube_profil: params[:youtube_profil], user_id: current_user.id
     redirect_to '/contacts'
   end
   
@@ -21,7 +23,7 @@ class ContactsController < ApplicationController
   end
   
   def update
-    Contact.update(params[:id], last_name: params[:last_name], first_name: params[:first_name], email: params[:email], phone: params[:phone], adress: params[:adress], facebook_profil: params[:facebook_profil], twitter_profil: params[:twitter_profil], linkedin_profil: params[:linkedin_profil], instagram_profil: params[:instagram_profil], youtube_profil: params[:youtube_profil])
+    Contact.update(params[:id], last_name: params[:last_name], first_name: params[:first_name], email: params[:email], phone: params[:phone], adress: params[:adress], facebook_profil: params[:facebook_profil], twitter_profil: params[:twitter_profil], linkedin_profil: params[:linkedin_profil], instagram_profil: params[:instagram_profil], youtube_profil: params[:youtube_profil], user_id: current_user.id)
     redirect_to "/contacts/#{params[:id]}"
   end
 

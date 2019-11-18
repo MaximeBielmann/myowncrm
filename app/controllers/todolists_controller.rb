@@ -1,4 +1,6 @@
 class TodolistsController < ApplicationController
+  before_action :authenticate_user!
+  
   def add
     @project = Opportunity.find(params[:id])
   end
@@ -8,7 +10,7 @@ class TodolistsController < ApplicationController
   end
   
   def create
-    Todolist.create opportunity_id: params[:id], end_date: params[:end_date], content: params[:content], status: params[:status]
+    Todolist.create opportunity_id: params[:id], end_date: params[:end_date], content: params[:content], status: params[:status], user_id: current_user.id
     redirect_to "/opportunities/#{params[:id]}"
   end
 
@@ -17,10 +19,17 @@ class TodolistsController < ApplicationController
   end
   
   def update
-    @todo = Todolist.where(opportunity_id: params[:id])
+    Todolist.update(params[:id], status: "FINISH", user_id: current_user.id)
+    redirect_to :back
+  end
+  
+  def cancel
+    Todolist.update(params[:id], status: "PENDING", user_id: current_user.id)
+    redirect_to :back
   end
   
   def delete
     Todolist.find(params[:id]).destroy
+    redirect_to :back
   end
 end
