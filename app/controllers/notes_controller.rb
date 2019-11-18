@@ -1,8 +1,4 @@
 class NotesController < ApplicationController
-  def add
-    @opportunity = Opportunity.find(params[:id])
-  end
-  
   def create
     Note.create note_date: DateTime.now, note_title: params[:note_title], note_content: params[:note_content], opportunity_id: params[:id], user_id: current_user.id
     redirect_to "/opportunities/#{params[:id]}"

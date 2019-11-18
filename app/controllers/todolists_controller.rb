@@ -1,9 +1,5 @@
 class TodolistsController < ApplicationController
   before_action :authenticate_user!
-  
-  def add
-    @project = Opportunity.find(params[:id])
-  end
 
   def index
     @todolists = Todolist.all

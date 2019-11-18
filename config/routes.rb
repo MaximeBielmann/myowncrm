@@ -18,14 +18,12 @@ Rails.application.routes.draw do
   post '/opportunities/:id' => "opportunities#create"
   patch '/opportunities/:id' => "opportunities#update"
   delete '/opportunities/:id' => "opportunities#destroy"
-  
-  get '/opportunities/:id/add_todolist' => "todolists#add"
+ 
   post '/todo/:id' => "todolists#create"
   patch '/todo/:id/finish' => "todolists#update"
   patch '/todo/:id/pending' => "todolists#cancel"
   delete '/todo/:id' => "todolists#delete"
   
-  get '/opportunities/:id/add_note' => "notes#add"
   post '/notes/:id' => "notes#create"
   patch '/notes/:id' => "notes#update"
   delete '/notes/:id' => "notes#destroy"
