@@ -14,6 +14,7 @@
  *= require_self
  */
 
+
 h1,h2,h3,h4,h5 {
     margin-top: 30px;
 }
@@ -22,4 +23,16 @@ h1,h2,h3,h4,h5 {
     color: #53a0fe;
     text-align: center;
     border-color: #53a0fe;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+ 
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0;
 }
