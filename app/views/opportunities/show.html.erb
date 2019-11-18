@@ -85,15 +85,14 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <h3>Ajouter une note</h3>
       
-      <% @notes.each do |note| %>
-        <p><%= note.note_title %> le <%= note.note_date.strftime("%d-%m-%Y") %></p>
-        <p><%= note.note_content %></p>
-      <% end %>
     </div>
     <div class="col-6">
       <h2 class="text-center">Ajouter une note pour le projet : <%= @opportunity.project %></h2>
+        <% @notes.each do |note| %>
+        <p><%= note.note_title %> le <%= note.note_date.strftime("%d-%m-%Y") %></p>
+        <p><%= note.note_content %></p>
+        <% end %>
         <%= form_tag("/notes/#{params[:id]}", method: "post") do %>
           <div class="form-group">
             <%= label_tag(:note_title, "Titre :") %>
