@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h2 class="text-center">Ajouter une note pour le projet : <%= @opportunity.project %></h2>
+        <%= form_tag("/notes/#{params[:id]}", method: "post") do %>
+          <div class="form-group">
+            <%= label_tag(:note_title, "Titre :") %>
+            <%= text_field_tag(:note_title, nil, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag(:note_content, "Description :") %>
+            <%= text_area_tag(:note_content, nil, class: 'form-control') %>
+          </div>
+          <div class="form-group">
+              <%= submit_tag("Ajouter la note", class: 'btn btn-primary btn-block') %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
